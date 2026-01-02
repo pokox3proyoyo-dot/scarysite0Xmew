@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0xMEW | TERMINAL ACCESS</title>
+    <style>
+        :root {
+            --neon-green: #00ff41;
+            --dark-bg: #0a0a0a;
+            --soft-glow: rgba(0, 255, 65, 0.2);
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--neon-green);
+            font-family: 'Fira Code', 'Courier New', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* Эффект старого монитора */
+        body::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 1, 0.06));
+            z-index: 2;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 900px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--neon-green);
+            box-shadow: 0 0 40px var(--soft-glow);
+            padding: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Место под твой баннер */
+        .banner {
+            white-space: pre;
+            font-size: 10px;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            color: #fff;
+            text-shadow: 0 0 10px var(--neon-green);
+        }
+
+        .console-text {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        .command { color: #fff; }
+
+        .status {
+            display: inline-block;
+            padding: 2px 8px;
+            background: var(--neon-green);
+            color: #000;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .glitch {
+            font-size: 2em;
+            font-weight: bold;
+            text-transform: uppercase;
+            animation: glitch 1s linear infinite;
+        }
+
+        @keyframes glitch {
+            2%, 64% { transform: translate(2px,0) skew(0deg); }
+            4%, 60% { transform: translate(-2px,0) skew(0deg); }
+            62% { transform: translate(0,0) skew(5deg); }
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background: var(--neon-green);
+            animation: blink 0.8s infinite;
+        }
+
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        .critical { color: #ff003c; text-shadow: 0 0 10px #ff003c; }
+    </style>
+</head>
+<body onclick="initHack()">
+
+    <div class="container">
+        <div class="banner">
+    ██████╗ ██╗  ██╗███╗   ███╗███████╗██╗    ██╗
+   ██╔═████╗╚██╗██╔╝████╗ ████║██╔════╝██║    ██║
+   ██║██╔██║ ╚███╔╝ ██╔████╔██║█████╗  ██║ █╗ ██║
+   ████╔╝██║ ██╔██╗ ██║╚██╔╝██║██╔══╝  ██║███╗██║
+   ╚██████╔╝██╔╝ ██╗██║ ╚═╝ ██║███████╗╚███╔███╔╝
+    ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝ ╚══╝╚══╝
+        </div>
+
+        <div class="console-text" id="console">
+            <span class="command">root@0xMEW:~#</span> <span id="typing"></span><span class="cursor"></span>
+        </div>
+    </div>
+
+    <script>
+        const lines = [
+            "Initializing network breach...",
+            "Target identified: 192.168.0.108",
+            "Hardware MAC: 02:43:42:02:45:9d",
+            "Bypassing Xbox-DNS security layers... [OK]",
+            "Intercepting data streams from vk.com and tiktok.com...",
+            "Status: <span class='critical glitch'>SYSTEM COMPROMISED</span>",
+            "All your traffic belongs to MEW now.",
+            "Don't turn off your Wi-Fi. It's too late."
+        ];
+
+        let lineIdx = 0;
+        let charIdx = 0;
+        const speed = 50;
+
+        function type() {
+            if (lineIdx < lines.length) {
+                let currentLine = lines[lineIdx];
+                document.getElementById("typing").innerHTML = lines.slice(0, lineIdx).join("<br><span class='command'>root@0xMEW:~#</span> ") + 
+                    (lineIdx > 0 ? "<br><span class='command'>root@0xMEW:~#</span> " : "") + 
+                    currentLine.substring(0, charIdx);
+                
+                if (charIdx < currentLine.length) {
+                    charIdx++;
+                    setTimeout(type, speed);
+                } else {
+                    lineIdx++;
+                    charIdx = 0;
+                    setTimeout(type, 1000);
+                }
+            }
+        }
+
+        function initHack() {
+            // Вибрация телефона при клике
+            if ("vibrate" in navigator) {
+                navigator.vibrate([200, 100, 200, 100, 500]);
+            }
+            // Можно добавить запуск страшного звука здесь
+        }
+
+        window.onload = type;
+    </script>
+</body>
+</html>
