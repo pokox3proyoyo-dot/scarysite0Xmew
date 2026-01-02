@@ -11,6 +11,16 @@
             --soft-glow: rgba(0, 255, 65, 0.2);
         }
 
+        .critical { 
+            color: #ff003c; 
+            text-shadow: 0 0 15px #ff003c, 0 0 5px #fff; 
+            font-weight: bold;
+            background: rgba(255, 0, 60, 0.1);
+        }
+
+        #typing {
+            text-shadow: 0 0 5px var(--neon-green);
+        }
         body {
             background-color: var(--dark-bg);
             color: var(--neon-green);
@@ -116,49 +126,57 @@
         </div>
     </div>
 
-    <script>
-        const lines = [
-            "Initializing network breach...",
-            "Target identified: 192.168.0.108",
-            "Hardware MAC: 02:43:42:02:45:9d",
-            "Bypassing Xbox-DNS security layers... [OK]",
-            "Intercepting data streams from vk.com and tiktok.com...",
-            "Status: <span class='critical glitch'>SYSTEM COMPROMISED</span>",
-            "All your traffic belongs to MEW now.",
-            "Don't turn off your Wi-Fi. It's too late."
-        ];
+   <script>
+    const lines = [
+        "Initializing 0xMEW core...",
+        "Target found: 192.168.0.108",
+        "Virtual gateway exploited: 02:43:42:02:45:9d",
+        "<span class='critical'>[!] SECURITY BREACH DETECTED</span>",
+        "You feel fear of 0xMew...",
+        "Downloading personal data: [██████████] 100%",
+        "You are an idiot ahahahahaaaa!",
+        "You are an idiot ahahahahaaaa!",
+        "You are an idiot ahahahahaaaa!",
+        "Status: <span class='critical glitch'>OWNED BY 0xMEW</span>",
+        "Closing all exit nodes...",
+        "Goodbye, .108. See you in the logs."
+    ];
 
-        let lineIdx = 0;
-        let charIdx = 0;
-        const speed = 50;
+    let lineIdx = 0;
+    let charIdx = 0;
+    const speed = 10; // МАКСИМАЛЬНАЯ СКОРОСТЬ (было 50)
 
-        function type() {
-            if (lineIdx < lines.length) {
-                let currentLine = lines[lineIdx];
-                document.getElementById("typing").innerHTML = lines.slice(0, lineIdx).join("<br><span class='command'>root@0xMEW:~#</span> ") + 
-                    (lineIdx > 0 ? "<br><span class='command'>root@0xMEW:~#</span> " : "") + 
-                    currentLine.substring(0, charIdx);
-                
-                if (charIdx < currentLine.length) {
-                    charIdx++;
-                    setTimeout(type, speed);
-                } else {
-                    lineIdx++;
-                    charIdx = 0;
-                    setTimeout(type, 1000);
-                }
+    function type() {
+        const consoleElem = document.getElementById("typing");
+        if (lineIdx < lines.length) {
+            let currentLine = lines[lineIdx];
+            
+            // Формируем текст: все предыдущие линии + текущая печатаемая
+            let completedText = lines.slice(0, lineIdx).join("<br><span class='command'>root@0xMEW:~#</span> ");
+            consoleElem.innerHTML = (lineIdx > 0 ? completedText + "<br><span class='command'>root@0xMEW:~#</span> " : "") + 
+                                    currentLine.substring(0, charIdx);
+            
+            if (charIdx < currentLine.length) {
+                charIdx++;
+                setTimeout(type, speed);
+            } else {
+                lineIdx++;
+                charIdx = 0;
+                // Пауза между строками тоже меньше (300мс вместо 1000мс)
+                setTimeout(type, 300); 
             }
         }
+    }
 
-        function initHack() {
-            // Вибрация телефона при клике
-            if ("vibrate" in navigator) {
-                navigator.vibrate([200, 100, 200, 100, 500]);
-            }
-            // Можно добавить запуск страшного звука здесь
+    function initHack() {
+        if ("vibrate" in navigator) {
+            // Телефон будет вибрировать как бешеный при клике
+            navigator.vibrate([500, 200, 500, 200, 500, 200, 1000]);
         }
+        // Если хочешь звука, можно добавить сюда вызов аудио
+    }
 
-        window.onload = type;
-    </script>
+    window.onload = type;
+</script>
 </body>
 </html>
